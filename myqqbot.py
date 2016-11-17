@@ -2,21 +2,21 @@
 # -*- coding: utf-8 -*-
 
 from qqbot import QQBot
-import re
+import re, requests
 
 class MyQQBot(QQBot):
     def onPollComplete(self, msgType, from_uin, buddy_uin, message):
         reply = ''
         message = message.split()
-        if not message:
+        if message:
             if message[0] == 'command:':
                 if re.search('ss',message[1]):
                      reply = requests.get('https://ss.aong.cn', verify = 'ss.pem').text
                 elif message[1] == '-help':
                     reply = '欢迎使用QQBot，使用方法：\n' + \
                             '\t-help\n' + \
-                            '\t-list {buddy|group|discuss}\n' + \
-                            '\t-send {buddy|group|discuss} {buddy_qq|group_qq|discuss_uin} message[1]\n' + \
+                            # '\t-list {buddy|group|discuss}\n' + \
+                            # '\t-send {buddy|group|discuss} {buddy_qq|group_qq|discuss_uin} message[1]\n' + \
                             '\t-refetch\n' + \
                             '\t-stop\n'
                 elif message[1][:6] == '-list ':
@@ -41,8 +41,10 @@ class MyQQBot(QQBot):
                     self.refetch()
                     reply = '重新获取 好友/群/讨论组 成功'
                 elif message[1] == '-stop':
-                    reply = 'QQBot已关闭'
+                    reply = '系统已关闭'
                     self.stopped = True
+                else:
+                    reply = "sb"
         self.send(msgType, from_uin, reply)
 
 myqqbot = MyQQBot()
