@@ -15,8 +15,6 @@ class MyQQBot(QQBot):
                 elif message[1] == '-help':
                     reply = '欢迎使用QQBot，使用方法：\n' + \
                             '\t-help\n' + \
-                            # '\t-list {buddy|group|discuss}\n' + \
-                            # '\t-send {buddy|group|discuss} {buddy_qq|group_qq|discuss_uin} message[1]\n' + \
                             '\t-refetch\n' + \
                             '\t-stop\n'
                 elif message[1][:6] == '-list ':
